@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(map_manager)
+project(traject_recorder)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -8,16 +8,9 @@ endif()
 find_package(ament_cmake_auto REQUIRED)
 ament_auto_find_build_dependencies()
 
-ament_auto_add_library(${PROJECT_NAME} SHARED
-  src/map_manager.cpp
+ament_auto_add_library(traject_recorder_auto SHARED
+  src/traject_recorder_auto.cpp
 )
-
-# target_link_libraries(${PROJECT_NAME} ${YAML_CPP_LIBRARIES})
-
-# rclcpp_components_register_nodes(${PROJECT_NAME}
-#   PLUGIN "nav::MapServer"
-#   EXECUTABLE ${PROJECT_NAME}
-# )
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
