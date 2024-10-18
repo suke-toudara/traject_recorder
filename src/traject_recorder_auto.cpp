@@ -15,6 +15,15 @@ TrajectRecorderAuto::TrajectRecorderAuto(const rclcpp::NodeOptions & options)
         "/odom", 10, std::bind(&PositionMonitor::odom_callback, this, std::placeholders::_1));
     last_position_ = std::nullopt;
     start_time_ = this->now();
+
+    std::String csv_file_path = "saved_points.csv" 
+    csv_file_.open(csv_file_path);
+    if (!csv_file_) {
+        RCLCPP_ERROR(this->get_logger(), "CSVファイルを開けませんでした。");
+    } else {
+        // ヘッダを書き込む
+        csv_file_ << "x,y,z\n";
+    }
 }
 
 void TrajectRecorderAuto::odom_callback(const nav_msgs::msg::Odometry::SharedPtr msg)
@@ -61,12 +70,12 @@ void PositionMonitor::publish_marker()
     marker.id = 0;
     marker.type = visualization_msgs::msg::Marker::POINTS;
     marker.action = visualization_msgs::msg::Marker::ADD;
-    marker.scale.x = 0.2;  
-    marker.scale.y = 0.2;  
+    marker.scale.x = marker.scale.y = marker.scale.z = 0.02;
     marker.color.a = 1.0;  
     marker.color.r = 1.0;  
     marker.color.g = 0.0;  
     marker.color.b = 0.0;  
+    marker.lifetime = rclcpp::Duration(0.0);
     for (const auto &point : saved_points_) {
         geometry_msgs::msg::Point p;
         p.x = point.x;
@@ -75,6 +84,14 @@ void PositionMonitor::publish_marker()
         marker.points.push_back(p);
     }
     marker_pub_->publish(marker);
+}
+
+void PositionMonitor::write_point_to_csv(const geometry_msgs::msg::Point &point)
+{
+    if (csv_file_.is_open()) {
+        csv_file_ << point.x << "," << point.y << "," << point.z << "\n";
+        RCLCPP_INFO(this->get_logger(), "CSVに書き込み: x=%.2f, y=%.2f, z=%.2f", point.x, point.y, point.z);
+    }
 }
 
 }
