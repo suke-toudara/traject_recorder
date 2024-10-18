@@ -4,7 +4,7 @@
 namespace traject_recorder
 {
 TrajectRecorderAuto::TrajectRecorderAuto(const rclcpp::NodeOptions & options)
-: Node("position_monitor", options),
+: Node("traject_recorder", options),
 {
     subscription_ = this->create_subscription<nav_msgs::msg::Odometry>(
         "/odom", 10, std::bind(&PositionMonitor::odom_callback, this, std::placeholders::_1));
