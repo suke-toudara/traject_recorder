@@ -4,7 +4,7 @@
 namespace traject_recorder
 {
 TrajectRecorderAuto::TrajectRecorderAuto(const rclcpp::NodeOptions & options)
-: Node("traject_recorder", options),
+: Node("traject_recorder_auto", options),
 {
     declare_parameter("sampling_time",10000);               //[s]
     declare_parameter("distance_interval",10000);           //[m]
@@ -61,7 +61,7 @@ void TrajectRecorderAuto::save_point(const geometry_msgs::msg::Point &position)
     RCLCPP_INFO(this->get_logger(), "ポイント保存: x=%.2f, y=%.2f, z=%.2f", position.x, position.y, position.z);
 }
 
-void PositionMonitor::publish_marker()
+void TrajectRecorderAuto::publish_marker()
 {
     visualization_msgs::msg::Marker marker;
     marker.header.frame_id = "map";
@@ -86,7 +86,7 @@ void PositionMonitor::publish_marker()
     marker_pub_->publish(marker);
 }
 
-void PositionMonitor::write_point_to_csv(const geometry_msgs::msg::Point &point)
+void TrajectRecorderAuto::write_point_to_csv(const geometry_msgs::msg::Point &point)
 {
     if (csv_file_.is_open()) {
         csv_file_ << point.x << "," << point.y << "," << point.z << "\n";
