@@ -5,13 +5,15 @@
   <version>0.0.0</version>
   <description>traject_recorder</description>
   <maintainer email="keeeesukee@gmail.com">suke</maintainer>
-  <license></license>
+   <license>Apache-2.0</license>
 
   <buildtool_depend>ament_cmake_auto</buildtool_depend>
   
   <depend>rclcpp</depend>
   <depend>rclcpp_components</depend>
   <depend>nav_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>visualization_msgs</depend>
   
   <export>
     <build_type>ament_cmake</build_type>
