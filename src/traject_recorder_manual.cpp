@@ -1,4 +1,4 @@
-#include "traject_recorder/traject_recorder_manual.hpp"
+#include <traject_recorder/traject_recorder_manual.hpp>
 #include <cmath>
 
 namespace traject_recorder
@@ -43,7 +43,7 @@ void TrajectRecorderManual::publish_marker()
     }
     marker_pub_->publish(marker);
 }
-
+}
 
 #include <rclcpp_components/register_node_macro.hpp>
 RCLCPP_COMPONENTS_REGISTER_NODE(traject_recorder::TrajectRecorderManual)

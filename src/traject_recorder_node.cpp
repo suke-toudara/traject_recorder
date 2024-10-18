@@ -1,4 +1,4 @@
-#include <waypoint_manager/waypoint_manager_component.hpp>
+#include <traject_recorder/traject_recorder_auto.hpp>
 #include <memory>
 
 int main(int argc, char * argv[])

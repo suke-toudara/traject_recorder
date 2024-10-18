@@ -7,11 +7,14 @@
 #include <optional>
 #include <vector>
 #include <fstream>
+#include "visualization_msgs/msg/marker_array.hpp"
 
+namespace traject_recorder
+{
 class TrajectRecorderAuto : public rclcpp::Node
 {
 public:
-    TrajectRecorderAuto();
+    explicit TrajectRecorderAuto(const rclcpp::NodeOptions & options);
 
 private:
     void odom_callback(const nav_msgs::msg::Odometry::SharedPtr msg);
@@ -27,9 +30,10 @@ private:
     std::optional<geometry_msgs::msg::Point> last_position_;
     rclcpp::Time start_time_;
     std::vector<geometry_msgs::msg::Point> saved_points_;
-    const double distance_interval_;
-    const double sampling_time_;
+    double distance_interval_;
+    double sampling_time_;
     
     std::ofstream csv_file_;
-}
+};
+} // namespace traject_recorde
 #endif  // TRAJECT_RECORDER_AUTO_HPP
