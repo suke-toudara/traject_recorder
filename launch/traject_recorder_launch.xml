@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+  <node_container pkg="rclcpp_components" exec="component_container" name="traject_recorder_container" namespace="traject_recorder" >
+    <composable_node pkg="traject_recorder" plugin="traject_recorder::TrajectRecorderAuto" name="traject_recorder_node" namespace="traject_recorder">
+      <param from="$(find-pkg-share traject_recorder)/config/traject_recorder_config.yaml" />
+    </composable_node>
+  </node_container>
+</launch>
