@@ -1,5 +1,5 @@
 /**:
   ros__parameters:
-    sampling_time : 100.0
-    distance_interval : 100.0
+    sampling_time : 2.0
+    distance_interval : 2.0
  
